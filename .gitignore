@@ -5,3 +5,5 @@
 .vscode/ipch
 
 src/mqtt_secrets.h
+src/ap_secrets.h
+src/http_secrets.h
