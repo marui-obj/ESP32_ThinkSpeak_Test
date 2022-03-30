@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.ejs": "html",
+        "arduino.h": "c",
+        "lm73.h": "c"
+    }
+}
