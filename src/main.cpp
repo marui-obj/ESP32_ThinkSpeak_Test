@@ -33,6 +33,9 @@ const char* password = SECRET_PASS;
 
 
 void connectWifi(){
+  /* Connect Access Point with SSID and password */
+  /* If Wifi not connect then polling unitl it connect */
+
   WiFi.begin(ssid, password);
   Serial.println("Connecting");
   while(WiFi.status() != WL_CONNECTED){
@@ -46,6 +49,9 @@ void connectWifi(){
 
 #ifdef HTTP_PROT
 void httpRequest(float temp, int ldr){
+  /* Use HTTP Methods to Requset Thingspeak server to update field */
+  /* This request is in URL encoded format, but you can also send it in text, json, or XML format. */
+
     http.begin(client, serverName);
 
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");
