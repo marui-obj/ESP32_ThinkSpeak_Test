@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include <WiFi.h>
 #include <LM73.h>
-#include "ThingSpeak.h"
 #include "ap_secrets.h"
 
 #define HTTP_PROT
@@ -50,14 +49,11 @@ void httpRequest(float temp, int ldr){
     http.begin(client, serverName);
 
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");
-    String httpRequestData = "api_key=" + apiKey + "&field1=" + String(temp);
-    http.POST(httpRequestData);
-
-    http.addHeader("Content-Type", "application/x-www-form-urlencoded");
-    httpRequestData = "api_key=" + apiKey + "&field2=" + String(ldr);
-    http.POST(httpRequestData);
-
+    String httpRequestData1 = "api_key=" + apiKey + "&field1=" + String(temp) + "&field2=" + String(ldr);
+    int status = http.POST(httpRequestData1);
     http.end();
+
+    Serial.printf("POST status: %d\n", status);
 }
 #else
 void connectMqtt(){
@@ -88,8 +84,8 @@ void mqttPublish(long pubChannelID, String message) {
 
 
 void setup() {
-  connectWifi();
   Serial.begin(9600);
+  connectWifi();
   #ifndef HTTP_PROT
     Serial.println("MQTT");
     mqttClient.setServer( server, mqttPort ); 
