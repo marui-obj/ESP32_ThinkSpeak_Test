@@ -10,5 +10,6 @@ void setup() {
 
 void loop() {
   float val = lm73.getVal(14);
-  Serial.println(val);
+  int ldr_val = analogRead(36);
+  Serial.printf("Temp: %f, LDR: %d\n", val, ldr_val);
 }
