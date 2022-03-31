@@ -63,6 +63,8 @@ void httpRequest(float temp, int ldr){
 }
 #else
 void connectMqtt(){
+  /* Polling Connect to Mqtt broker */
+
   while (!mqttClient.connected())
   {
     if ( mqttClient.connect( clientID, mqttUserName, mqttPass ) ) {
@@ -82,6 +84,8 @@ void connectMqtt(){
 }
 
 void mqttPublish(long pubChannelID, String message) {
+  /* Publish Data to Broker */
+  
   String topicString ="channels/" + String( pubChannelID ) + "/publish";
   mqttClient.publish( topicString.c_str(), message.c_str() );
 }
